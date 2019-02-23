@@ -10,7 +10,7 @@ import UIKit
 
 class SideMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var menuItems:[String] = ["Scan Codes", "Settings"] // Names of cells in side menu
+    var menuItems:[String] = ["Event Selector", "Settings"] // Names of cells in side menu
 
     /**
      Initializes the view when view controller appears.

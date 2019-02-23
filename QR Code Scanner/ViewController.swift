@@ -21,6 +21,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var gid:String? // Holds the GID for the event that is selected to scan for
 
     @IBOutlet weak var eventPicker: UIPickerView! // UIPicker for events displayed on the ViewController
+    @IBOutlet weak var scanButton: UIButton! // Button used to select an event
+    @IBOutlet weak var invalidMessage: UIView! // Alerts the user to add a valid passkey
+    
     
     /**
      Shows side menu if hamburger button pressed.
@@ -61,6 +64,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
+        eventPicker.isHidden = true
+        scanButton.isHidden = true
+        invalidMessage.isHidden = true
         sendRequest()
     }
     
@@ -70,16 +76,27 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     **/
     func sendRequest() {
         
+        DispatchQueue.main.async {
+            // Shows loading indicator while marking attendance
+            let wait = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 10, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            loadingIndicator.startAnimating();
+            wait.view.addSubview(loadingIndicator)
+            self.present(wait, animated: true, completion: nil)
+        }
+        
         let keychain = KeychainSwift() // Creates KeychainSwift object
         passKey = keychain.get("connectKey") ?? "null" // Get's Connect passkey from keychain
         
         dateFormatter.dateFormat = "dd MMM yyyy " // formats SOAP request dates to comply with Hobsons' standards
         
-        //let startFrom = dateFormatter.string(from: date) + "12:00 AM" // Doesn't get events earlier than current date at 12:00AM
-        let startFrom = "05 Oct 2019 12:00 AM" // Date used for testing
+        let startFrom = dateFormatter.string(from: date) + "12:00 AM" // Doesn't get events earlier than current date at 12:00AM
+        //let startFrom = "05 Oct 2019 12:00 AM" // Used for testing event
         
-        //let startTo = dateFormatter.string(from: date) + "11:59 PM" // Doesn't get events later than current date at 11:59PM
-        let startTo = "05 Oct 2019 11:59 PM" // Date used for testing
+        let startTo = dateFormatter.string(from: date) + "11:59 PM" // Doesn't get events later than current date at 11:59PM
+        //let startTo = "05 Oct 2019 11:59 PM" // Used for testing event
         
         // SOAP request body with date parameters
         let body:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:web='http://connect2.askadmissions.net/webservices/'>" +
@@ -113,16 +130,24 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let string = String(describing: strData) // SOAP response in human-readable format
             if string.range(of:"Passkey is invalid") != nil { // If the passkey is invalid...
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Invalid Passkey", message: "Go to the app settings to add a valid passkey.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.dismiss(animated: false, completion: {
+                        let alert = UIAlertController(title: "Invalid Passkey", message: "Go to the app settings to add a valid passkey.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: {
+                            self.invalidMessage.isHidden = false
+                        })
+                    })
                 }
             } else { // The passkey is valid
                 self.getEventNames(in: string)
                 self.getEventGIDs(in: string)
                 DispatchQueue.main.async { // Must run all view changes in main thread
-                    self.eventPicker.delegate = self // Displays event data in view
-                    self.eventPicker.dataSource = self // Displays event data in view
+                    self.dismiss(animated: false, completion: {
+                        self.eventPicker.isHidden = false // Show event picker in the view
+                        self.scanButton.isHidden = false // Show scan button in the view
+                        self.eventPicker.delegate = self // Displays event data in view
+                        self.eventPicker.dataSource = self // Displays event data in view
+                    })
                 }
             }
             if error != nil { // If the request does not work...

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Select an Event-->
+        <!--Event Selector-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="QR_Code_Scanner" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,30 +19,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="58" translatesAutoresizingMaskIntoConstraints="NO" id="FFi-kA-zm9">
-                                <rect key="frame" x="0.0" y="181.5" width="375" height="304"/>
+                                <rect key="frame" x="0.0" y="176.5" width="375" height="314"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsl-UY-7HZ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-PD-Aiu">
-                                        <rect key="frame" x="150" y="274" width="75" height="30"/>
+                                        <rect key="frame" x="137.5" y="274" width="100" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.20000000000000001" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="WDD-yo-qA0"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="kdN-TM-Hpi"/>
+                                            <constraint firstAttribute="height" constant="40" id="WDD-yo-qA0"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="kdN-TM-Hpi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Scan">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Scan"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -54,16 +48,40 @@
                                     <constraint firstItem="jsl-UY-7HZ" firstAttribute="width" secondItem="FFi-kA-zm9" secondAttribute="width" id="qpy-0o-L1P"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPR-rg-jSp">
+                                <rect key="frame" x="16" y="269.5" width="343" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A valid passkey was not found. Go to settings to enter a new passkey." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxD-OG-54y">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="128"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="RxD-OG-54y" secondAttribute="trailing" id="BFs-uH-qnt"/>
+                                    <constraint firstAttribute="height" constant="128" id="CJz-wC-BcC"/>
+                                    <constraint firstItem="RxD-OG-54y" firstAttribute="top" secondItem="ZPR-rg-jSp" secondAttribute="top" id="TLg-zj-V7F"/>
+                                    <constraint firstItem="RxD-OG-54y" firstAttribute="leading" secondItem="ZPR-rg-jSp" secondAttribute="leading" id="cSA-FV-MuS"/>
+                                    <constraint firstAttribute="bottom" secondItem="RxD-OG-54y" secondAttribute="bottom" id="gUo-x9-QlF"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FFi-kA-zm9" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="OqX-4F-38b"/>
+                            <constraint firstItem="ZPR-rg-jSp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ths-FZ-4o5"/>
                             <constraint firstItem="FFi-kA-zm9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Twb-Nd-C4s"/>
                             <constraint firstItem="FFi-kA-zm9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VQr-Ov-WAO"/>
+                            <constraint firstItem="ZPR-rg-jSp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XBt-0h-w6Q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZPR-rg-jSp" secondAttribute="trailing" constant="16" id="oml-Yd-ueU"/>
+                            <constraint firstItem="ZPR-rg-jSp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uvd-7B-8vT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Select an Event" id="4f7-Ui-a5V">
+                    <navigationItem key="navigationItem" title="Event Selector" id="4f7-Ui-a5V">
+                        <barButtonItem key="backBarButtonItem" title="Home" id="fbM-9p-RdP"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" image="menu" id="KUR-oC-P03">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -73,12 +91,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="eventPicker" destination="jsl-UY-7HZ" id="qoZ-Dl-Dpz"/>
+                        <outlet property="invalidMessage" destination="ZPR-rg-jSp" id="Izc-aw-HtG"/>
+                        <outlet property="scanButton" destination="UsV-PD-Aiu" id="yVB-hh-xNe"/>
                         <segue destination="QL4-AD-CMH" kind="show" identifier="showCamera" id="aZE-ei-Wzd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92.753623188405811" y="1471.2053571428571"/>
+            <point key="canvasLocation" x="92" y="1470.3148425787108"/>
         </scene>
         <!--Scanner View Controller-->
         <scene sceneID="yC0-bs-kxj">
