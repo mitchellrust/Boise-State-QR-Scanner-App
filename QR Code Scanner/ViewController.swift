@@ -143,7 +143,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
             let string = String(describing: strData) // SOAP response in human-readable format
-            print(string)
             if string.range(of:"Passkey is invalid") != nil { // If the passkey is invalid...
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: {
