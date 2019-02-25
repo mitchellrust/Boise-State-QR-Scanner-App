@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		6CB31351E42888342FCC3303 /* Pods_QR_Code_Scanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B085C6C7DE983C89D39095 /* Pods_QR_Code_Scanner.framework */; };
+		9416720D2220EA4300158D78 /* Gotham-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 941671FB2220EA4300158D78 /* Gotham-Black.otf */; };
+		9416720F2220EA4300158D78 /* GothamLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941671FD2220EA4300158D78 /* GothamLight.ttf */; };
+		941672112220EA4300158D78 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 941671FF2220EA4300158D78 /* Gotham-Bold.otf */; };
+		941672162220EA4300158D78 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 941672042220EA4300158D78 /* Gotham-Light.otf */; };
+		941672172220EA4300158D78 /* GothamBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941672052220EA4300158D78 /* GothamBold.ttf */; };
+		9416721A2220EA4300158D78 /* GothamBook.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941672082220EA4300158D78 /* GothamBook.ttf */; };
+		9416721C2220EA4300158D78 /* GothamMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9416720A2220EA4300158D78 /* GothamMedium.ttf */; };
+		946E06C522224ED1008BD24B /* logo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 946E06C422224ED0008BD24B /* logo.pdf */; };
 		947DD78D21BF1CA60057F2CD /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 947DD78C21BF1CA60057F2CD /* success.wav */; };
 		947DD79121BF1E5E0057F2CD /* failure.wav in Resources */ = {isa = PBXBuildFile; fileRef = 947DD79021BF1E5E0057F2CD /* failure.wav */; };
 		947DD79321BF240B0057F2CD /* bronco.wav in Resources */ = {isa = PBXBuildFile; fileRef = 947DD79221BF240B0057F2CD /* bronco.wav */; };
@@ -30,6 +38,14 @@
 		34F3903BC3D3D020EFAB6F93 /* Pods-QR Code Scanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QR Code Scanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-QR Code Scanner/Pods-QR Code Scanner.release.xcconfig"; sourceTree = "<group>"; };
 		56B085C6C7DE983C89D39095 /* Pods_QR_Code_Scanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QR_Code_Scanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		658318B01E6A2378824F6EAC /* Pods-QR Code Scanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QR Code Scanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QR Code Scanner/Pods-QR Code Scanner.debug.xcconfig"; sourceTree = "<group>"; };
+		941671FB2220EA4300158D78 /* Gotham-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Black.otf"; sourceTree = "<group>"; };
+		941671FD2220EA4300158D78 /* GothamLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamLight.ttf; sourceTree = "<group>"; };
+		941671FF2220EA4300158D78 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
+		941672042220EA4300158D78 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
+		941672052220EA4300158D78 /* GothamBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBold.ttf; sourceTree = "<group>"; };
+		941672082220EA4300158D78 /* GothamBook.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBook.ttf; sourceTree = "<group>"; };
+		9416720A2220EA4300158D78 /* GothamMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMedium.ttf; sourceTree = "<group>"; };
+		946E06C422224ED0008BD24B /* logo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = logo.pdf; sourceTree = "<group>"; };
 		947DD78C21BF1CA60057F2CD /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		947DD79021BF1E5E0057F2CD /* failure.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = failure.wav; sourceTree = "<group>"; };
 		947DD79221BF240B0057F2CD /* bronco.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bronco.wav; sourceTree = "<group>"; };
@@ -77,6 +93,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		941671F82220EA4300158D78 /* gotham-cufonfonts */ = {
+			isa = PBXGroup;
+			children = (
+				941671FB2220EA4300158D78 /* Gotham-Black.otf */,
+				941671FD2220EA4300158D78 /* GothamLight.ttf */,
+				941671FF2220EA4300158D78 /* Gotham-Bold.otf */,
+				941672042220EA4300158D78 /* Gotham-Light.otf */,
+				941672052220EA4300158D78 /* GothamBold.ttf */,
+				941672082220EA4300158D78 /* GothamBook.ttf */,
+				9416720A2220EA4300158D78 /* GothamMedium.ttf */,
+			);
+			path = "gotham-cufonfonts";
+			sourceTree = "<group>";
+		};
 		947DD78921BF19760057F2CD /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +147,8 @@
 				94D7393B21B6EB5C0082318C /* CustomTableViewCell.swift */,
 				94D7391C21B6DE440082318C /* Main.storyboard */,
 				94D7391F21B6DE450082318C /* Assets.xcassets */,
+				946E06C422224ED0008BD24B /* logo.pdf */,
+				941671F82220EA4300158D78 /* gotham-cufonfonts */,
 				947DD78921BF19760057F2CD /* Sounds */,
 				94D7392121B6DE450082318C /* LaunchScreen.storyboard */,
 				94D7392421B6DE450082318C /* Info.plist */,
@@ -218,11 +250,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941672162220EA4300158D78 /* Gotham-Light.otf in Resources */,
+				946E06C522224ED1008BD24B /* logo.pdf in Resources */,
+				9416720D2220EA4300158D78 /* Gotham-Black.otf in Resources */,
 				94D7392321B6DE450082318C /* LaunchScreen.storyboard in Resources */,
+				941672112220EA4300158D78 /* Gotham-Bold.otf in Resources */,
+				9416721A2220EA4300158D78 /* GothamBook.ttf in Resources */,
 				94D7392021B6DE450082318C /* Assets.xcassets in Resources */,
 				947DD79321BF240B0057F2CD /* bronco.wav in Resources */,
 				94D7391E21B6DE440082318C /* Main.storyboard in Resources */,
+				9416720F2220EA4300158D78 /* GothamLight.ttf in Resources */,
 				947DD79121BF1E5E0057F2CD /* failure.wav in Resources */,
+				941672172220EA4300158D78 /* GothamBold.ttf in Resources */,
+				9416721C2220EA4300158D78 /* GothamMedium.ttf in Resources */,
 				947DD78D21BF1CA60057F2CD /* success.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

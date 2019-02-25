@@ -48,8 +48,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //passKey = keychain.get("connectKey") ?? "null" // retrieves Connect passkey from the keychain
-        
         // Sets the "success" tone
         if broncoMode == false {
             success = Bundle.main.path(forResource: "success", ofType: "wav")

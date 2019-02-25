@@ -22,7 +22,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     @IBOutlet weak var eventPicker: UIPickerView! // UIPicker for events displayed on the ViewController
     @IBOutlet weak var scanButton: UIButton! // Button used to select an event
-    @IBOutlet weak var invalidMessage: UIView! // Alerts the user to add a valid passkey
+    @IBOutlet weak var messageBox: UIView! // View that holds the message
+    @IBOutlet weak var message: UILabel! // Informs the user of information about the app
     
     
     /**
@@ -60,13 +61,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     /**
-    Runs initialization methods.
+    Initializes the view.
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Gotham-Black", size: 20)!]
         eventPicker.isHidden = true
         scanButton.isHidden = true
-        invalidMessage.isHidden = true
+        messageBox.isHidden = true
         sendRequest()
     }
     
@@ -76,8 +78,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     **/
     func sendRequest() {
         
+        // Show loading indicator while gettings events.
         DispatchQueue.main.async {
-            // Shows loading indicator while marking attendance
             let wait = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
             let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 10, width: 50, height: 50))
             loadingIndicator.hidesWhenStopped = true
@@ -125,35 +127,72 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         lobj_Request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         // Sends the SOAP request and parses response
-        let task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error -> Void in
+        let task = session.dataTask(with: lobj_Request as URLRequest, completionHandler: {data, response, error in
+            // check for any errors
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: false, completion: {
+                        self.message.text = "Error. Contact mitchellrust@boisestate.edu for assistance."
+                        let alert = UIAlertController(title: "An Error Occured", message: "Could not retrieve events.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        self.messageBox.isHidden = false
+                    })
+                }
+                return
+            }
             let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
             let string = String(describing: strData) // SOAP response in human-readable format
+            print(string)
             if string.range(of:"Passkey is invalid") != nil { // If the passkey is invalid...
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: {
-                        let alert = UIAlertController(title: "Invalid Passkey", message: "Go to the app settings to add a valid passkey.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: {
-                            self.invalidMessage.isHidden = false
-                        })
+                        if keychain.get("connectKey") == nil { // If no passkey exists...
+                            self.message.text = "Passkey Not Found"
+                        } else { // The passkey exists but is invalid.
+                            self.message.text = "Invalid Passkey"
+                        }
+                        self.messageBox.isHidden = false
                     })
                 }
-            } else { // The passkey is valid
-                self.getEventNames(in: string)
-                self.getEventGIDs(in: string)
-                DispatchQueue.main.async { // Must run all view changes in main thread
+            } else if string.range(of:"No events/interviews were found") != nil { // No events are scheduled for the input date.
+                DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: {
-                        self.eventPicker.isHidden = false // Show event picker in the view
-                        self.scanButton.isHidden = false // Show scan button in the view
-                        self.eventPicker.delegate = self // Displays event data in view
-                        self.eventPicker.dataSource = self // Displays event data in view
+                        self.message.text = "There are no events scheduled for today."
+                        self.messageBox.isHidden = false
                     })
+                }
+            } else if string.range(of:"Decimal byte array constructor") != nil { // Error, usually incorrectly entered passkey.
+                DispatchQueue.main.async {
+                    self.dismiss(animated: false, completion: {
+                        self.message.text = "Invalid Passkey"
+                        self.messageBox.isHidden = false
+                    })
+                }
+            } else { // The passkey is valid.
+                self.getEventNames(in: string)
+                if self.eventNames.count == 0 { // True if some unknown error occured.
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: false, completion: {
+                            self.message.text = "An unknown error occured. If the issue persists, please contact mitchellrust@boisestate.edu."
+                            self.messageBox.isHidden = false
+                        })
+                    }
+                } else { // Successfully gathered events...
+                    self.getEventGIDs(in: string)
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: false, completion: {
+                            self.eventPicker.isHidden = false // Show event picker in the view
+                            self.scanButton.isHidden = false // Show scan button in the view
+                            self.eventPicker.delegate = self // Displays event data in view
+                            self.eventPicker.dataSource = self // Displays event data in view
+                        })
+                    }
                 }
             }
-            if error != nil { // If the request does not work...
-                print("Error: " + error.debugDescription)
+            if error != nil { // If the request does not work, alert the user.
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Error", message: "An error occured. Please try again.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Error", message: "An unknown error occured. If the issue persists, please contact mitchellrust@boisestate.edu.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -232,5 +271,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
      **/
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return eventNames[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = (view as? UILabel) ?? UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "Gotham-Bold", size: 20)
+        label.text = eventNames[row]
+        return label
     }
 }

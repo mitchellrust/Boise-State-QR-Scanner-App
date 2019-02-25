@@ -12,6 +12,8 @@ import KeychainSwift
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var broncoMode: UISwitch! // On/Off switch for Bronco Mode
+    @IBOutlet weak var broncoModeLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
     let defaults = UserDefaults.standard // UserDefaults allows user preferences to be remembered over different sessions
     
@@ -26,14 +28,21 @@ class SettingsViewController: UIViewController {
     **/
     @IBAction func newAPIpressed(_ sender: Any) {
         // Prompts user to enter Hobson's Connect API Key
-        let alert = UIAlertController(title: "Add Passkey", message: "Please enter a passkey.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add New Passkey", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.text = ""
         }
         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             textField?.autocorrectionType = UITextAutocorrectionType.no // Disallows entered key to be stored in cache for autocorrect
-            self.keychain.set((textField?.text)!, forKey: "connectKey", withAccess: .accessibleWhenUnlocked) // Adds passkey to keychain
+            if (textField?.text != "") {
+                self.keychain.set((textField?.text)!, forKey: "connectKey", withAccess: .accessibleWhenUnlocked) // Adds passkey to keychain
+                self.deleteButton.isEnabled = true
+            } else {
+                let alert = UIAlertController(title: "No Passkey Entered", message: "Passkey was not updated.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -44,14 +53,15 @@ class SettingsViewController: UIViewController {
      if one exists.
     **/
     @IBAction func deleteKeyPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Are you sure?", message: "Delete the current passkey from the keychain?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete Passkey?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { Void in
             if self.keychain.delete("connectKey") { // If successfully deleted passkey from keychain
-                let alert = UIAlertController(title: "Passkey Deleted", message: "Passkey successfully deleted from keychain.", preferredStyle: .alert)
+                self.deleteButton.isEnabled = false
+                let alert = UIAlertController(title: "Passkey Deleted", message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
-            } else { // No passkey was found in keychain
-                let alert = UIAlertController(title: "Passkey Does Not Exist", message: "A passkey does not exist. Try adding a new passkey.", preferredStyle: .alert)
+            } else { // Passkey could not be deleted
+                let alert = UIAlertController(title: "Error", message: "Could not delete passkey.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -73,6 +83,13 @@ class SettingsViewController: UIViewController {
      **/
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Gotham-Black", size: 20)!]
         broncoMode.isOn = defaults.bool(forKey: "broncoMode") // Sets state of switch based on previous default set
+        
+        if (keychain.get("connectKey") == nil) {
+            deleteButton.isEnabled = false
+        } else {
+            deleteButton.isEnabled = true
+        }
     }
 }
