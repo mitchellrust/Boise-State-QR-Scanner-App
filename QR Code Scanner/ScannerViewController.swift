@@ -48,6 +48,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = UIColor.black // Set back button color to black
+        
         // Sets the "success" tone
         if broncoMode == false {
             success = Bundle.main.path(forResource: "success", ofType: "wav")

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Gotham-Bold.otf">
+        <array key="GothamBold.ttf">
             <string>Gotham-Bold</string>
         </array>
     </customFonts>
@@ -173,6 +173,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Gotham-Black" family="Gotham" pointSize="20"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>

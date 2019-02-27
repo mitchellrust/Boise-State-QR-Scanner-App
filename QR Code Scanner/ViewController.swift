@@ -132,10 +132,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             guard error == nil else {
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: {
-                        self.message.text = "Error. Contact mitchellrust@boisestate.edu for assistance."
-                        let alert = UIAlertController(title: "An Error Occured", message: "Could not retrieve events.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        self.message.text = "An error occured. Please check your internet connection and try again."
                         self.messageBox.isHidden = false
                     })
                 }
