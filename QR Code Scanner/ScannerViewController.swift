@@ -100,8 +100,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 previewView.bringSubviewToFront(toolbar)
                 previewView.bringSubviewToFront(redSquare)
                 previewView.bringSubviewToFront(greenSquare)
-                greenSquare.alpha = 0.0
-                redSquare.alpha = 0.0
+                greenSquare.isHidden = true
+                redSquare.isHidden = true
                 captureSession?.startRunning()
             } catch {
                 print("Error: \(error)")
@@ -163,20 +163,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 self.successAudioPlayer.play() // Plays "success" tone
                 DispatchQueue.main.async { // Must run all view changes in main thread
                     self.dismiss(animated: false, completion: nil) // Removes loading indicator
-                    self.greenSquare.alpha = 1.0 // Shows visual for "success"
-                    UIView.animate(withDuration: 3, animations: { // Fade out "success" visual
-                        self.greenSquare.alpha = 0.0
-                        }, completion: nil)
+                    self.greenSquare.isHidden = false // Shows visual for "success"
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.greenSquare.isHidden = true
                     self.captureSession?.startRunning() // Resume video capture
                 }
             } else { // There was a problem (invalid contactID, Connect issue, etc)...
                 self.failedAudioPlayer.play() // Plays "failure" tone
                 DispatchQueue.main.async { // Must run all view changes in main thread
                     self.dismiss(animated: false, completion: nil) // Removes loading indicator
-                    self.redSquare.alpha = 1.0 // Shows visual for "failure"
-                    UIView.animate(withDuration: 3, animations: { // Fade out "failure" visual
-                        self.redSquare.alpha = 0.0
-                    }, completion: nil)
+                    self.redSquare.isHidden = false // Shows visual for "failure"
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.redSquare.isHidden = true
                     self.captureSession?.startRunning() // Resume video capture
                 }
             }
