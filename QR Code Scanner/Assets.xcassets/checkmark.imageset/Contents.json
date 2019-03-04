@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "red x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "checkmark.pdf",
       "scale" : "2x"
     },
     {

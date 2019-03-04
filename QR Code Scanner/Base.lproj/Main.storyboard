@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="GothamBold.ttf">
+        <array key="Gotham-Bold.otf">
             <string>Gotham-Bold</string>
         </array>
     </customFonts>
@@ -114,13 +114,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenSquare" translatesAutoresizingMaskIntoConstraints="NO" id="jcR-Xl-o1d">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="jcR-Xl-o1d" userLabel="Check Mark">
                                 <rect key="frame" x="19" y="165" width="337.5" height="337.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jcR-Xl-o1d" secondAttribute="height" multiplier="1:1" id="Abo-zA-PeJ"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareImage" translatesAutoresizingMaskIntoConstraints="NO" id="mWh-va-yhj">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redX" translatesAutoresizingMaskIntoConstraints="NO" id="mWh-va-yhj" userLabel="Orange X">
                                 <rect key="frame" x="19" y="165" width="337.5" height="337.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mWh-va-yhj" secondAttribute="height" multiplier="1:1" id="uH2-Hi-ME6"/>
@@ -254,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bronco Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJG-NU-Iau">
-                                <rect key="frame" x="15" y="94" width="136" height="30"/>
+                                <rect key="frame" x="15" y="94" width="122" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3Qj-Qb-gSZ"/>
                                 </constraints>
@@ -309,7 +309,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send feedback to: mitchellrust@boisestate.edu" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kh3-ai-qS5">
-                                <rect key="frame" x="64" y="651" width="247" height="0.0"/>
+                                <rect key="frame" x="64" y="611" width="247" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="247" id="3Hy-ZA-aMP"/>
                                 </constraints>
@@ -358,9 +358,9 @@
     </scenes>
     <resources>
         <image name="camera" width="37.5" height="37.5"/>
-        <image name="greenSquare" width="320" height="320"/>
+        <image name="checkmark" width="512" height="512"/>
         <image name="menu" width="39" height="39"/>
-        <image name="squareImage" width="320" height="320"/>
+        <image name="redX" width="512" height="512"/>
     </resources>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

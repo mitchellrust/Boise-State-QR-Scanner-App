@@ -94,11 +94,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         dateFormatter.dateFormat = "dd MMM yyyy " // formats SOAP request dates to comply with Hobsons' standards
         
-        let startFrom = dateFormatter.string(from: date) + "12:00 AM" // Doesn't get events earlier than current date at 12:00AM
-        //let startFrom = "05 Oct 2019 12:00 AM" // Used for testing event
+        //let startFrom = dateFormatter.string(from: date) + "12:00 AM" // Doesn't get events earlier than current date at 12:00AM
+        let startFrom = "05 Oct 2019 12:00 AM" // Used for testing event
         
-        let startTo = dateFormatter.string(from: date) + "11:59 PM" // Doesn't get events later than current date at 11:59PM
-        //let startTo = "05 Oct 2019 11:59 PM" // Used for testing event
+        //let startTo = dateFormatter.string(from: date) + "11:59 PM" // Doesn't get events later than current date at 11:59PM
+        let startTo = "05 Oct 2019 11:59 PM" // Used for testing event
         
         // SOAP request body with date parameters
         let body:String = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:web='http://connect2.askadmissions.net/webservices/'>" +
