@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var eventGIDs:[String] = [""] // Will hold list of today's events' GIDs
     var passKey:String = "" // Holds the Connect passkey used for web requests
     var gid:String? // Holds the GID for the event that is selected to scan for
+    var selectedEvent:String = "" // Holds the selected Event Name to pass to Scanner VC
 
     @IBOutlet weak var eventPicker: UIPickerView! // UIPicker for events displayed on the ViewController
     @IBOutlet weak var scanButton: UIButton! // Button used to select an event
@@ -40,7 +41,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
      triggers the transition to ScannerViewController.
      **/
     @IBAction func eventSelected(_ sender: Any) {
-        let selectedEvent = eventNames[eventPicker.selectedRow(inComponent: 0)] // Gets event the user selects
+        selectedEvent = eventNames[eventPicker.selectedRow(inComponent: 0)] // Gets event the user selects
         gid = eventGIDs[eventNames.firstIndex(of: selectedEvent)!] // Gets the selected event's GID
         if gid == "" { // if no event is selected...
             let alert = UIAlertController(title: "No Event Selected", message: "An event must be selected in order to scan QR codes.", preferredStyle: .alert)
@@ -56,8 +57,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     **/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as? ScannerViewController // Gets Scanner View
-        vc?.eventGID = self.gid! // Passes GID to ScannerViewController.swift
         vc?.passKey = self.passKey // Passes passKey to ScannerViewController.swift
+        vc?.eventGID = self.gid! // Passes GID to ScannerViewController.swift
+        vc?.eventName.text = self.selectedEvent // Passes selectedEvent to ScannerViewController.swift
     }
     
     /**

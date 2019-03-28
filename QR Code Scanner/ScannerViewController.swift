@@ -13,6 +13,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     var passKey = "" // Value is populated with Connect passkey from the keychain    
     var eventGID = "" // Value is populated with selected eventGID when view loads
+    let eventName = UILabel() // Displays event name at top of view
     
     let broncoMode = UserDefaults.standard.bool(forKey: "broncoMode") // Checks if Bronco Mode is enabled
     var success:String! // Holds name of "success" audio file
@@ -49,6 +50,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         super.viewDidLoad()
         
         navigationController?.navigationBar.tintColor = UIColor.black // Set back button color to black
+        self.eventName.textColor = UIColor.black
+        self.eventName.font = UIFont(name: "Gotham-Black", size: 20)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: eventName)
         
         // Sets the "success" tone
         if broncoMode == false {
@@ -162,8 +166,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             if string.range(of:"successfully updated") != nil { // If successfully marked as attended...
                 self.successAudioPlayer.play() // Plays "success" tone
                 DispatchQueue.main.async { // Must run all view changes in main thread
-                    self.dismiss(animated: false, completion: nil) // Removes loading indicator
-                    self.greenSquare.isHidden = false // Shows visual for "success"
+                    self.dismiss(animated: false, completion: {
+                        self.greenSquare.isHidden = false // Shows visual for "success"
+                    }) // Removes loading indicator
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.greenSquare.isHidden = true
@@ -172,8 +177,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             } else { // There was a problem (invalid contactID, Connect issue, etc)...
                 self.failedAudioPlayer.play() // Plays "failure" tone
                 DispatchQueue.main.async { // Must run all view changes in main thread
-                    self.dismiss(animated: false, completion: nil) // Removes loading indicator
-                    self.redSquare.isHidden = false // Shows visual for "failure"
+                    self.dismiss(animated: false, completion: {
+                        self.redSquare.isHidden = false // Shows visual for "failure"
+                    }) // Removes loading indicator
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.redSquare.isHidden = true

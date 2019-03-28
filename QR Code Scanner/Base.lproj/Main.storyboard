@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Gotham-Bold.otf">
+        <array key="GothamBold.ttf">
             <string>Gotham-Bold</string>
         </array>
     </customFonts>
@@ -254,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bronco Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJG-NU-Iau">
-                                <rect key="frame" x="15" y="94" width="122" height="30"/>
+                                <rect key="frame" x="15" y="94" width="136" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3Qj-Qb-gSZ"/>
                                 </constraints>
@@ -309,7 +309,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send feedback to: mitchellrust@boisestate.edu" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kh3-ai-qS5">
-                                <rect key="frame" x="64" y="611" width="247" height="40"/>
+                                <rect key="frame" x="64" y="651" width="247" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="247" id="3Hy-ZA-aMP"/>
                                 </constraints>

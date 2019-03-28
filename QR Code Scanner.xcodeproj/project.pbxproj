@@ -93,7 +93,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		941671F82220EA4300158D78 /* gotham-cufonfonts */ = {
+		941671F82220EA4300158D78 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				941671FB2220EA4300158D78 /* Gotham-Black.otf */,
@@ -104,7 +104,7 @@
 				941672082220EA4300158D78 /* GothamBook.ttf */,
 				9416720A2220EA4300158D78 /* GothamMedium.ttf */,
 			);
-			path = "gotham-cufonfonts";
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		947DD78921BF19760057F2CD /* Sounds */ = {
@@ -148,7 +148,7 @@
 				94D7391C21B6DE440082318C /* Main.storyboard */,
 				94D7391F21B6DE450082318C /* Assets.xcassets */,
 				946E06C422224ED0008BD24B /* logo.pdf */,
-				941671F82220EA4300158D78 /* gotham-cufonfonts */,
+				941671F82220EA4300158D78 /* Fonts */,
 				947DD78921BF19760057F2CD /* Sounds */,
 				94D7392121B6DE450082318C /* LaunchScreen.storyboard */,
 				94D7392421B6DE450082318C /* Info.plist */,
